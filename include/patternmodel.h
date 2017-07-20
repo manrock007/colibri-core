@@ -3171,11 +3171,13 @@ class IndexedPatternModel: public PatternModel<IndexedData,IndexedDataHandler,Ma
 					//std::cerr << " Pattern " << pattern.hash() << " occurs: " << this->occurrencecount(pattern) << " skipcontent=" << skipcontent.size() << std::endl;
 					if ((int) skipcontent.size() < minskiptypes) { //will take care of token threshold too, patterns not meeting the token threshold are not included
 						//std::cerr << "..pruning" << std::endl;
+						iter = this->erase(iter);
 						pruned++;
 						continue;
 					}
-                } catch(KeyError &e) { } // ignore
-                iter = this->erase(iter);
+                } catch(KeyError &e) {
+                	iter = this->erase(iter);
+                } // ignore
             }
             iter++;
         }
